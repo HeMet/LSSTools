@@ -1,0 +1,20 @@
+#!/bin/sh
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+#  Quote path in case of spaces or special chars
+DIR="\"${DIR}"
+
+PATH_SEP="/"
+ANTLR4_JAR="/usr/local/lib/antlr-4.6-complete.jar"
+
+GRAMMAR_DIR="Grammar/ItemFilter.g4"
+GRAMMAR_ABS_DIR="${DIR}${PATH_SEP}${GRAMMAR_DIR}\""
+
+OUTPUT_DIR="Autogen"
+OUPUT_ABS_DIR="${DIR}${PATH_SEP}${OUTPUT_DIR}\""
+
+ANTLR4_COMMAND="java -jar ${ANTLR4_JAR} ${GRAMMAR_ABS_DIR} -visitor -Dlanguage=Swift -o ${OUPUT_ABS_DIR}"
+
+#java -jar $antlr4 '${parent_path}/Grammar/ItemFilter.h4' -visitor -Dlanguage=Swift -o '${parent_path}/Autorgen'
+eval $ANTLR4_COMMAND
