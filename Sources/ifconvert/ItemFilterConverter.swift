@@ -12,21 +12,28 @@ import Antlr4
 class ItemFilterConverter {
     
     func convert(itemFilter: String) throws -> String {
-        var inputStr = "193\na = 5\nclear\nb = 6\na+b*2\n(1+2)*3\n"
+        let input = ANTLRInputStream(itemFilter);
+        let lexer = ItemFilterLexer(input);
+        let tokens = CommonTokenStream(lexer);
+        let parser = try ItemFilterParser(tokens);
+        let tree = try parser.filter()
         
-        do {
-            let input = ANTLRInputStream(inputStr);
-            let lexer = ItemFilterLexer(input);
-            let tokens = CommonTokenStream(lexer);
-            let parser = try ItemFilterParser(tokens);
-            let tree = try parser.filter()
-            
-            //    let visitor = EvalVisitor();
-            //    _ = visitor.visit(tree);
-        } catch let e {
-            print(e)
-        }
-
-        return ""
+        
+        let walker = ParseTreeWalker()
+        let analyzer = ItemFilterAnalyzer()
+        try walker.walk(analyzer, tree)
+        
+        let converter = Converter(blocks: analyzer.blocks,
+                                  colorTracker: analyzer.colorTracker,
+                                  fontSizeTracker: analyzer.fontSizeTracker)
+        
+        converter.convert()
+        
+        let serializer = Serializer(declarations: converter.declarations,
+                                    orderedDeclarations: converter.orderedDeclarations)
+        let output = serializer.serialize()
+        
+        print(output)
+        return output
     }
 }

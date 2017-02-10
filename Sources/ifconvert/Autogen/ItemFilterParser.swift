@@ -913,6 +913,11 @@ open class ItemFilterParser: Parser {
 		return _localctx
 	}
 	open class Set_color_commandContext:ParserRuleContext {
+		public var name: Token!
+		public var red: Token!
+		public var green: Token!
+		public var blue: Token!
+		public var alpha: Token!
 		open func Set_color_command_name() -> TerminalNode? { return getToken(ItemFilterParser.Tokens.Set_color_command_name.rawValue, 0) }
 		open func Number_literal() -> Array<TerminalNode> { return getTokens(ItemFilterParser.Tokens.Number_literal.rawValue) }
 		open func Number_literal(_ i:Int) -> TerminalNode?{
@@ -954,13 +959,29 @@ open class ItemFilterParser: Parser {
 		do {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(91)
-		 	try match(ItemFilterParser.Tokens.Set_color_command_name.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Set_color_command_name.rawValue)
+		 			_localctx.castdown(Set_color_commandContext.self).name = assignmentValue
+		 	     }()
+
 		 	setState(92)
-		 	try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 			_localctx.castdown(Set_color_commandContext.self).red = assignmentValue
+		 	     }()
+
 		 	setState(93)
-		 	try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 			_localctx.castdown(Set_color_commandContext.self).green = assignmentValue
+		 	     }()
+
 		 	setState(94)
-		 	try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 			_localctx.castdown(Set_color_commandContext.self).blue = assignmentValue
+		 	     }()
+
 		 	setState(96)
 		 	try _errHandler.sync(self)
 		 	_la = try _input.LA(1)
@@ -970,7 +991,11 @@ open class ItemFilterParser: Parser {
 		 	      return testSet
 		 	 }()) {
 		 		setState(95)
-		 		try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 		try {
+		 				let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 				_localctx.castdown(Set_color_commandContext.self).alpha = assignmentValue
+		 		     }()
+
 
 		 	}
 
@@ -1052,6 +1077,8 @@ open class ItemFilterParser: Parser {
 		return _localctx
 	}
 	open class Set_font_size_commandContext:ParserRuleContext {
+		public var name: Token!
+		public var fontSize: Token!
 		open func Number_literal() -> TerminalNode? { return getToken(ItemFilterParser.Tokens.Number_literal.rawValue, 0) }
 		open override func getRuleIndex() -> Int { return ItemFilterParser.RULE_set_font_size_command }
 		override
@@ -1088,9 +1115,17 @@ open class ItemFilterParser: Parser {
 		do {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(103)
-		 	try match(ItemFilterParser.Tokens.T__9.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.T__9.rawValue)
+		 			_localctx.castdown(Set_font_size_commandContext.self).name = assignmentValue
+		 	     }()
+
 		 	setState(104)
-		 	try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 			_localctx.castdown(Set_font_size_commandContext.self).fontSize = assignmentValue
+		 	     }()
+
 
 		}
 		catch ANTLRException.recognition(let re) {

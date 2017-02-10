@@ -88,7 +88,7 @@ block_command_item
     ;
 
 set_color_command
-    : Set_color_command_name Number_literal Number_literal Number_literal Number_literal?
+    : name=Set_color_command_name red=Number_literal green=Number_literal blue=Number_literal (alpha=Number_literal)?
     ;
 
 Set_color_command_name
@@ -102,7 +102,7 @@ play_alert_command
     ;
 
 set_font_size_command
-    : 'SetFontSize' Number_literal
+    : name='SetFontSize' fontSize=Number_literal
     ;
 
 Operator
