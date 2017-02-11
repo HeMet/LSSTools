@@ -63,4 +63,18 @@ class ItemFilterAnalyzer: ItemFilterBaseListener {
         fontSizeTracker.addReference(to: fontSize)
         currentBlock.actions[name] = .number(fontSize)
     }
+    
+    override func exitPlay_alert_command(_ ctx: ItemFilterParser.Play_alert_commandContext) {
+        guard
+            let name = ctx.name.getText(),
+            let idStr = ctx.id.getText(),
+            let volumeStr = ctx.volume.getText(),
+            let id = Int(idStr),
+            let volume = Int(volumeStr)
+        else {
+            return
+        }
+        
+        currentBlock.actions[name] = .alert(Alert(id: id, volume: volume))
+    }
 }

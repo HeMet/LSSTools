@@ -57,6 +57,8 @@ extension Value {
             return "number"
         case .style:
             return "style"
+        case .alert:
+            return "alert"
         }
     }
     
@@ -74,6 +76,8 @@ extension Value {
             }
         case .style(let style):
             return style.serialize()
+        case .alert(let alert):
+            return "#(id: " + String(alert.id) + " volume: " + String(alert.volume) + ")"
         }
     }
 }

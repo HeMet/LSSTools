@@ -42,6 +42,24 @@ class Color: Hashable {
     }
 }
 
+class Alert: Hashable {
+    let id: Int
+    let volume: Int
+    
+    var hashValue: Int {
+        return combineHashes([id.hashValue, volume.hashValue])
+    }
+    
+    init(id: Int, volume: Int) {
+        self.id = id
+        self.volume = volume
+    }
+    
+    static func ==(l: Alert, r: Alert) -> Bool {
+        return l.id == r.id && l.volume == r.volume
+    }
+}
+
 fileprivate func combineHashes(_ hashes: [Int]) -> Int {
     var combinedHash = 5381
     
@@ -147,6 +165,7 @@ enum Value: Hashable {
     case number(Int)
     case bool(Bool)
     case color(Color)
+    case alert(Alert)
     case style(Style)
     
     var hashValue: Int {
@@ -158,6 +177,8 @@ enum Value: Hashable {
         case .color(let value):
             return value.hashValue
         case .style(let value):
+            return value.hashValue
+        case .alert(let value):
             return value.hashValue
         }
     }
@@ -171,6 +192,8 @@ enum Value: Hashable {
         case (.color(let l), .color(let r)):
             return l == r
         case (.style(let l), .style(let r)):
+            return l == r
+        case (.alert(let l), .alert(let r)):
             return l == r
         default:
             return false

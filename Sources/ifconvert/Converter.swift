@@ -40,6 +40,7 @@ class Converter {
         "SetTextColor": "textColor",
         "SetBackgroundColor": "backgroundColor",
         "SetFontSize": "fontSize",
+        "PlayAlertSound": "alert",
         "visible": "visible"
     ]
     
@@ -58,7 +59,7 @@ class Converter {
             case .number(let value):
                 isUnique = fontSizeTracker.isUniquelyReferenced(entity: value)
             default:
-                continue
+                isUnique = true
             }
             
             let expr: Expression
@@ -99,6 +100,8 @@ extension Value {
             return "color_"
         case .style:
             return "style_"
+        case .alert:
+            return "alert_"
         }
     }
 }

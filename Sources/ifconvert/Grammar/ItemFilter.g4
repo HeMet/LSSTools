@@ -98,7 +98,7 @@ Set_color_command_name
     ;
 
 play_alert_command
-    : 'PlayAlertSound' Number_literal Number_literal?
+    : name='PlayAlertSound' id=Number_literal volume=Number_literal?
     ;
 
 set_font_size_command

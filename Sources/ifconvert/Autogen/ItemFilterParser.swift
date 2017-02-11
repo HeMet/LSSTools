@@ -1010,6 +1010,9 @@ open class ItemFilterParser: Parser {
 		return _localctx
 	}
 	open class Play_alert_commandContext:ParserRuleContext {
+		public var name: Token!
+		public var id: Token!
+		public var volume: Token!
 		open func Number_literal() -> Array<TerminalNode> { return getTokens(ItemFilterParser.Tokens.Number_literal.rawValue) }
 		open func Number_literal(_ i:Int) -> TerminalNode?{
 			return getToken(ItemFilterParser.Tokens.Number_literal.rawValue, i)
@@ -1050,9 +1053,17 @@ open class ItemFilterParser: Parser {
 		do {
 		 	try enterOuterAlt(_localctx, 1)
 		 	setState(98)
-		 	try match(ItemFilterParser.Tokens.T__8.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.T__8.rawValue)
+		 			_localctx.castdown(Play_alert_commandContext.self).name = assignmentValue
+		 	     }()
+
 		 	setState(99)
-		 	try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 	try {
+		 			let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 			_localctx.castdown(Play_alert_commandContext.self).id = assignmentValue
+		 	     }()
+
 		 	setState(101)
 		 	try _errHandler.sync(self)
 		 	_la = try _input.LA(1)
@@ -1062,7 +1073,11 @@ open class ItemFilterParser: Parser {
 		 	      return testSet
 		 	 }()) {
 		 		setState(100)
-		 		try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 		try {
+		 				let assignmentValue = try match(ItemFilterParser.Tokens.Number_literal.rawValue)
+		 				_localctx.castdown(Play_alert_commandContext.self).volume = assignmentValue
+		 		     }()
+
 
 		 	}
 
