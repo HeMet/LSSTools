@@ -43,7 +43,10 @@ class ItemFilterAnalyzer: ItemFilterBaseListener {
             return // todo error
         }
         
-        let color = Color(r: r, g: g, b: b)
+        let _as = ctx.alpha?.getText()
+        let a = _as.flatMap { Int($0) }
+        
+        let color = Color(r: r, g: g, b: b, a: a)
         colorTracker.addReference(to: color)
         currentBlock.actions[name] = .color(color)
     }
