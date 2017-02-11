@@ -9,19 +9,15 @@
 import Foundation
 
 class Serializer {
-    let declarations: [String: Value]
-    let orderedDeclarations: [String]
+    let declarations: OrderedDictionary<String, Value>
     
-    init(declarations: [Value: String], orderedDeclarations: [String]) {
+    init(declarations: OrderedDictionary<Value, String>) {
         self.declarations = declarations.swapped()
-        self.orderedDeclarations = orderedDeclarations
     }
     
     func serialize() -> String {
         var result = ""
-        for reference in orderedDeclarations {
-            let value = declarations[reference]!
-            
+        for (reference, value) in declarations {
             let keyword = value.declarationKeyword
             let declaration = keyword + " " + reference + ": " + value.serialize() + "\n\n"
             result += declaration
@@ -33,6 +29,16 @@ class Serializer {
 extension Dictionary where Value: Hashable {
     func swapped() -> [Value: Key] {
         var result: [Value: Key] = [:]
+        for (key, value) in self {
+            result[value] = key
+        }
+        return result
+    }
+}
+
+extension OrderedDictionary where Value: Hashable {
+    func swapped() -> OrderedDictionary<Value, Key> {
+        var result = OrderedDictionary<Value, Key>()
         for (key, value) in self {
             result[value] = key
         }

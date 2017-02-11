@@ -15,8 +15,8 @@ class Converter {
     
     var rules: [Rule] = []
     
-    var declarations: [Value: String] = [:]
-    var orderedDeclarations: [String] = []
+    var declarations = OrderedDictionary<Value, String>()
+    
     var declarationCountersByPrefix: [String: Int] = [:]
     
     init(blocks: [Block], colorTracker: ReferenceTracker<Color>, fontSizeTracker: ReferenceTracker<Int>) {
@@ -83,7 +83,6 @@ class Converter {
             
             let reference = value.declarationPrefix + "\(index)"
             declarations[value] = reference
-            orderedDeclarations.append(reference)
             return reference
         }
     }

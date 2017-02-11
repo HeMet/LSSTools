@@ -29,8 +29,7 @@ class ItemFilterConverter {
         
         converter.convert()
         
-        let serializer = Serializer(declarations: converter.declarations,
-                                    orderedDeclarations: converter.orderedDeclarations)
+        let serializer = Serializer(declarations: converter.declarations)
         let output = serializer.serialize()
         
         print(output)
