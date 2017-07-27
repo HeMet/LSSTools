@@ -14,5 +14,7 @@ let identified = Property<Boolean>(name: "Identified", type: Boolean())
 let rarity = Property<Rarity>(name: "Rarity", type: Rarity())
 //let klass = Property<String>(name: "Class")
 
-width.equal(to: 2)
-rarity.matches(.unique)
+let wideUnique = CompositeCondition([
+    width.equal(to: 2),
+    rarity.matches(.unique)
+])

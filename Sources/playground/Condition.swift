@@ -22,3 +22,12 @@ extension Condition: AnyCondition {
     var _property: AnyProperty { return property }
     var _matches: Any { return matches }
 }
+
+
+struct CompositeCondition {
+    var conditions: [AnyCondition]
+    
+    init(_ conditions: [AnyCondition]) {
+        self.conditions = conditions
+    }
+}

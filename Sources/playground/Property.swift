@@ -39,6 +39,6 @@ extension PropertyType where VT: ComparableValueType {
 
 extension PropertyType {
     func matches(_ value: VT.Value) -> Condition<Self, Equality<VT>> {
-        return Condition(property: self, matches: Equality.equal(to: value))
+        return Condition(property: self, matches: Equality.matches(value))
     }
 }

@@ -19,7 +19,7 @@ enum Comparison<T: ComparableValueType>: Matcher {
 enum Equality<T: ValueType>: Matcher {
     typealias VT = T
     
-    case equal(to: T.Value)
+    case matches(T.Value)
 }
 
 protocol Matcher {
