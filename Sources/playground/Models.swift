@@ -31,43 +31,6 @@ fileprivate extension ItemProperty {
     }
 }
 
-struct Size {
-    var width: Int
-    var height: Int
-}
-
-struct ItemSize: ItemProperty {
-    var size: Size
-}
-
-struct Property<T: Equatable> {
-    let name: String
-}
-
-enum Condition<T: Equatable> {
-    case equal(to: T)
-    case any
-}
-
-struct Filter_<T: Equatable> {
-    var property: Property<T>
-    var condition: Condition<T>
-    
-    init(_ property: Property<T>, _ condition: Condition<T>) {
-        self.property = property
-        self.condition = condition
-    }
-}
-
-struct Filter {
-    var properties: [String: ItemProperty] = [:]
-    
-    init(_ properties: [ItemProperty]) {
-        for prop in properties {
-            self.properties[prop.identifier] = prop
-        }
-    }
-}
 
 extension Color {
     var hashValue: Int {
