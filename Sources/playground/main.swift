@@ -33,7 +33,7 @@ extension Sound {
 }
 
 let sixLinked = Rule(
-    condition: CompositeCondition([
+    items: ItemSet([
         linkedSockets.equal(to: 6),
         rarity.less(than: .unique)
         ]),
@@ -48,7 +48,7 @@ let sixLinked = Rule(
 )
 
 let sixSocketBestCraftingArmors = Rule(
-    condition: CompositeCondition([
+    items: ItemSet([
         sockets.equal(to: 6),
         baseType.matches(["Assassin's Garb",
                           "Glorious Plate",
@@ -66,4 +66,23 @@ let sixSocketBestCraftingArmors = Rule(
         visible: true,
         sound: .valueDrop
     )
+)
+
+let sixSocketBestCraftingArmors_: ItemSet = [
+    sockets.equal(to: 6),
+    baseType.matches(["Assassin's Garb",
+                      "Glorious Plate",
+                      "Astral Plate",
+                      "Vaal Regalia",
+                      "Zodiac Leather"]),
+    rarity.lessThanOrEqual(to: .rare),
+    itemLevel.greaterThanOrEqual(to: 84)
+]
+
+Rule(
+    items: POEItemSet(
+        width: .equal(to: 2),
+        height: .equal(to: 2)
+    ),
+    style: Style()
 )

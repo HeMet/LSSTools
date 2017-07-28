@@ -9,6 +9,11 @@
 import Foundation
 
 struct Rule {
-    var condition: CompositeCondition
+    var items: ItemSet
     var style: Style
+    
+    init(items: ItemSetConvertible, style: Style) {
+        self.items = items.toItemSet()
+        self.style = style
+    }
 }
