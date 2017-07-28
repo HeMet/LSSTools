@@ -13,7 +13,9 @@ enum Comparison<T: ComparableValueType>: Matcher {
     
     case equal(to: T.Value)
     case less(than: T.Value)
+    case lessThanOrEqual(to: T.Value)
     case greater(than: T.Value)
+    case greaterThanOrEqual(to: T.Value)
 }
 
 enum Equality<T: ValueType>: Matcher {

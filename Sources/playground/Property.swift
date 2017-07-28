@@ -35,6 +35,22 @@ extension PropertyType where VT: ComparableValueType {
     func equal(to: VT.Value) -> Condition<Self, Comparison<VT>> {
         return Condition(property: self, matches: Comparison.equal(to: to))
     }
+    
+    func less(than: VT.Value) -> Condition<Self, Comparison<VT>> {
+        return Condition(property: self, matches: Comparison.less(than: than))
+    }
+    
+    func greater(than: VT.Value) -> Condition<Self, Comparison<VT>> {
+        return Condition(property: self, matches: Comparison.greater(than: than))
+    }
+    
+    func lessThanOrEqual(to: VT.Value) -> Condition<Self, Comparison<VT>> {
+        return Condition(property: self, matches: Comparison.lessThanOrEqual(to: to))
+    }
+    
+    func greaterThanOrEqual(to: VT.Value) -> Condition<Self, Comparison<VT>> {
+        return Condition(property: self, matches: Comparison.greaterThanOrEqual(to: to))
+    }
 }
 
 extension PropertyType {

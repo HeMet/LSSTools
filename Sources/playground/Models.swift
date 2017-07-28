@@ -1,8 +1,10 @@
 struct Style {
-    var backgroundColor: Color
-    var textColor: Color
-    var borderColor: Color
-    var fontSize: FontSize
+    var backgroundColor: Color?
+    var textColor: Color?
+    var borderColor: Color?
+    var fontSize: FontSize?
+    var visible: Bool?
+    var sound: Sound?
 }
 
 struct Color: Hashable {
@@ -21,16 +23,10 @@ struct Color: Hashable {
 
 typealias FontSize = Int
 
-protocol ItemProperty {
-    
+struct Sound {
+    let id: UInt
+    let volume: UInt
 }
-
-fileprivate extension ItemProperty {
-    var identifier: String {
-        return String(describing: type(of: self))
-    }
-}
-
 
 extension Color {
     var hashValue: Int {

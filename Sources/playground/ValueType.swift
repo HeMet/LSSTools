@@ -26,7 +26,7 @@ struct Number: ComparableValueType {
     }
 }
 
-struct Rarity: ValueType {
+struct Rarity: ComparableValueType {
     typealias Value = ItemRarity
 }
 
@@ -36,4 +36,8 @@ enum ItemRarity: Equatable {
 
 struct Boolean: ValueType {
     typealias Value = Bool
+}
+
+struct StringList: ValueType {
+    typealias Value = [String]
 }
