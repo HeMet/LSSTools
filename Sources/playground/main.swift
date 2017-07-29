@@ -8,25 +8,6 @@
 
 import Foundation
 
-let width = Property(name: "Width", type: Number(1...2)) // could be compared
-let height = Property(name: "ItemHeight", type: Number(1...4))
-let identified = Property<Boolean>(name: "Identified", type: Boolean())
-let rarity = Property<Rarity>(name: "Rarity", type: Rarity())
-let linkedSockets = Property(name: "LinkedSockets", type: Number(2...6))
-let visible = Property<Boolean>(name: "Visible", type: Boolean())
-let baseType = Property(name: "BaseType", type: StringList())
-let sockets = Property(name: "Sockets", type: Number(0...6))
-let itemLevel = Property(name: "ItemLevel", type: Number(1...100))
-
-let backgroundColor = Property(name: "BackgroundColor", type: ColorValue())
-let textColor = Property(name: "TextColor", type: ColorValue())
-let borderColor = Property(name: "BorderColor", type: ColorValue())
-
-let wideUnique = CompositeCondition([
-    width.equal(to: 2),
-    rarity.matches(.unique)
-])
-
 extension Color {
     static let t1Items = Color(r: 255, g: 0, b: 0, a: 255)
 }
@@ -37,65 +18,68 @@ extension Sound {
 }
 
 let sixLinked = Rule(
-    items: ItemSet([
-        linkedSockets.equal(to: 6),
-        rarity.less(than: .unique)
-        ]),
-    style: Style(
-        backgroundColor: Color(r: 255, g: 255, b: 255, a: 255),
-        textColor: .t1Items,
-        borderColor: .t1Items,
-        fontSize: 45,
-        visible: true,
-        sound: .t1Drop
-    )
+    items: [
+        LinkedSockets.set(.equal(to: 6)),
+        Rarity.set(.less(than: .unique))
+        ],
+    style: [
+        BackgroundColor.set(Color(r: 255, g: 255, b: 255, a: 255)),
+        BorderColor.set(.t1Items),
+        FontSize.set(45),
+        Visible.set(true),
+        DropSound.set(.t1Drop)
+    ]
 )
 
 let sixSocketBestCraftingArmors = Rule(
-    items: ItemSet([
-        sockets.equal(to: 6),
-        baseType.matches(["Assassin's Garb",
+    items: [
+        Sockets.set(.equal(to: 6)),
+        BaseType.set(.matches(["Assassin's Garb",
                           "Glorious Plate",
                           "Astral Plate",
                           "Vaal Regalia",
-                          "Zodiac Leather"]),
-        rarity.lessThanOrEqual(to: .rare),
-        itemLevel.greaterThanOrEqual(to: 84)
-        ]),
-    style: Style(
-        backgroundColor: Color(r: 75, g: 75, b: 75),
-        textColor: nil,
-        borderColor: Color(r: 255, g: 255, b: 0, a: 255),
-        fontSize: 43,
-        visible: true,
-        sound: .valueDrop
-    )
+                          "Zodiac Leather"])),
+        Rarity.set(.lessThanOrEqual(to: .rare)),
+        ItemLevel.set(.greaterThanOrEqual(to: 84))
+        ],
+    style: [
+        BackgroundColor.set(Color(r: 75, g: 75, b: 75)),
+        BorderColor.set(Color(r: 255, g: 255, b: 0, a: 255)),
+        FontSize.set(43),
+        Visible.set(true),
+        DropSound.set(.valueDrop)
+    ]
 )
 
-let sixSocketBestCraftingArmors_: ItemSet = [
-    sockets.equal(to: 6),
-    baseType.matches(["Assassin's Garb",
+let sixSocketBestCraftingArmors_: PropertySet<ItemProperty> = [
+    Sockets.set(.equal(to: 6)),
+    BaseType.set(.matches(["Assassin's Garb",
                       "Glorious Plate",
                       "Astral Plate",
                       "Vaal Regalia",
-                      "Zodiac Leather"]),
-    rarity.lessThanOrEqual(to: .rare),
-    itemLevel.greaterThanOrEqual(to: 84)
+                      "Zodiac Leather"])),
+    Rarity.set(.lessThanOrEqual(to: .rare)),
+    ItemLevel.set(.greaterThanOrEqual(to: 84))
 ]
 
-Rule(
+_ = Rule(
     items: .poe(
         width: .equal(to: 2),
         height: .equal(to: 2)
     ),
-    style: Style()
+    style: PropertySet<StyleProperty>()
 )
 
-let style: Style_ = [
-    backgroundColor.matches(.t1Items)
-]
-
-
 var itemSet = PropertySet<ItemProperty>()
-itemSet.insert(ItemWidth.self, value: 3)
-itemSet.insert(ItemHeight.self, value: 2)
+itemSet.insert(ItemWidth.self, value: .equal(to:3))
+itemSet.insert(ItemHeight.self, value: .equal(to:2))
+
+var itemSet2 = PropertySet<ItemProperty>(
+    .bind(ItemWidth.self, .equal(to: 3)),
+    .bind(ItemHeight.self, .equal(to: 2))
+)
+
+var itemSet3: PropertySet<ItemProperty> = [
+    .bind(ItemWidth.self, .equal(to: 3)),
+    .bind(ItemHeight.self, .equal(to: 2))
+]

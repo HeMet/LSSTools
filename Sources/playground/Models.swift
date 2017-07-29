@@ -1,12 +1,3 @@
-struct Style {
-    var backgroundColor: Color?
-    var textColor: Color?
-    var borderColor: Color?
-    var fontSize: FontSize?
-    var visible: Bool?
-    var sound: Sound?
-}
-
 struct Color: Hashable {
     let r: UInt8
     let g: UInt8
@@ -20,8 +11,6 @@ struct Color: Hashable {
         self.a = a
     }
 }
-
-typealias FontSize = Int
 
 struct Sound {
     let id: UInt

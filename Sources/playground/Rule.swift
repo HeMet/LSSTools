@@ -9,16 +9,11 @@
 import Foundation
 
 struct Rule {
-    var items: ItemSet
-    var style: Style
+    var items: PropertySet<ItemProperty>
+    var style: PropertySet<StyleProperty>
     
-    init(items: ItemSetConvertible, style: Style) {
-        self.items = items.toItemSet()
-        self.style = style
-    }
-    
-    init(items: ItemSet, style: Style) {
-        self.items = items.toItemSet()
+    init(items: PropertySet<ItemProperty>, style: PropertySet<StyleProperty>) {
+        self.items = items
         self.style = style
     }
 }
