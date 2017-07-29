@@ -18,6 +18,10 @@ let baseType = Property(name: "BaseType", type: StringList())
 let sockets = Property(name: "Sockets", type: Number(0...6))
 let itemLevel = Property(name: "ItemLevel", type: Number(1...100))
 
+let backgroundColor = Property(name: "BackgroundColor", type: ColorValue())
+let textColor = Property(name: "TextColor", type: ColorValue())
+let borderColor = Property(name: "BorderColor", type: ColorValue())
+
 let wideUnique = CompositeCondition([
     width.equal(to: 2),
     rarity.matches(.unique)
@@ -80,9 +84,18 @@ let sixSocketBestCraftingArmors_: ItemSet = [
 ]
 
 Rule(
-    items: POEItemSet(
+    items: .poe(
         width: .equal(to: 2),
         height: .equal(to: 2)
     ),
     style: Style()
 )
+
+let style: Style_ = [
+    backgroundColor.matches(.t1Items)
+]
+
+
+var itemSet = PropertySet<ItemProperty>()
+itemSet.insert(ItemWidth.self, value: 3)
+itemSet.insert(ItemHeight.self, value: 2)

@@ -8,12 +8,12 @@ struct Style {
 }
 
 struct Color: Hashable {
-    let r: Int
-    let g: Int
-    let b: Int
-    let a: Int?
+    let r: UInt8
+    let g: UInt8
+    let b: UInt8
+    let a: UInt8?
     
-    init(r: Int, g: Int, b: Int, a: Int? = nil) {
+    init(r: UInt8, g: UInt8, b: UInt8, a: UInt8? = nil) {
         self.r = r
         self.g = g
         self.b = b

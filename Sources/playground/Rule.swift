@@ -16,4 +16,9 @@ struct Rule {
         self.items = items.toItemSet()
         self.style = style
     }
+    
+    init(items: ItemSet, style: Style) {
+        self.items = items.toItemSet()
+        self.style = style
+    }
 }

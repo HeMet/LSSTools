@@ -58,3 +58,47 @@ extension PropertyType {
         return Condition(property: self, matches: Equality.matches(value))
     }
 }
+
+protocol PropertyType_ {
+    associatedtype VT: ValueType
+    associatedtype Group
+    
+    static var name: String { get }
+}
+
+extension PropertyType_ {
+    static var name: String { return "\(self)" }
+}
+
+enum ItemWidth: PropertyType_ {
+    typealias VT = Number
+    typealias Group = ItemProperty
+}
+
+enum ItemHeight: PropertyType_ {
+    typealias VT = Number
+    typealias Group = ItemProperty
+}
+
+enum ItemProperty { }
+
+protocol PropertyGroup {
+    
+}
+
+struct PropertySet<T> {
+    private var values: [String: Any] = [:]
+    private var properties: [String: Any] = [:]
+    
+    func insert<P>(_ property: P.Type, value: P.VT.Value) where P: PropertyType_, P.Group == T {
+        
+    }
+    
+    func remove<P>(_ property: P.Type) where P: PropertyType_, P.Group == T {
+        
+    }
+    
+    func value<P>(_ property: P.Type) -> P.VT.Value? where P: PropertyType_, P.Group == T {
+        return values[property.name] as? P.VT.Value
+    }
+}

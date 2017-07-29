@@ -16,6 +16,8 @@ protocol ComparableValueType: ValueType {
 
 }
 
+// Item properties
+
 struct Number: ComparableValueType {
     typealias Value = UInt
     
@@ -40,4 +42,10 @@ struct Boolean: ValueType {
 
 struct StringList: ValueType {
     typealias Value = [String]
+}
+
+// Style properties
+
+struct ColorValue: ValueType {
+    typealias Value = Color
 }

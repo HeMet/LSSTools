@@ -49,3 +49,18 @@ struct POEItemSet: ItemSetConvertible {
         return ItemSet(result)
     }
 }
+
+extension ItemSet {
+    static func poe(width: Comparison<Number>? = nil, height: Comparison<Number>? = nil) -> ItemSet {
+        var result: [AnyCondition] = []
+        if let value = width {
+            let _width = Property(name: "Width", type: Number(1...2))
+            result.append(Condition(property: _width, matches: value))
+        }
+        if let value = height {
+            let _height = Property(name: "ItemHeight", type: Number(1...4))
+            result.append(Condition(property: _height, matches: value))
+        }
+        return ItemSet(result)
+    }
+}
