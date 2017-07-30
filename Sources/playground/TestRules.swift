@@ -9,8 +9,8 @@
 import Foundation
 
 func define() {
-    let sixLinked = Rule(
-        items: [
+    let sixLinked = POERule(
+        when: [
             LinkedSockets.equal(to: 6),
             Rarity.less(than: .unique)
         ],
@@ -23,8 +23,8 @@ func define() {
         ]
     )
     
-    let sixSocketBestCraftingArmors = Rule(
-        items: [
+    let sixSocketBestCraftingArmors = POERule(
+        when: [
             Sockets.equal(to: 6),
             BaseType.matches(["Assassin's Garb",
                               "Glorious Plate",
@@ -45,8 +45,8 @@ func define() {
 }
 
 func define2() {
-    let sixLinked = Rule(
-        items: [
+    let sixLinked = POERule(
+        when: [
             LinkedSockets.set(.equal(to: 6)),
             Rarity.set(.less(than: .unique))
         ],
@@ -59,8 +59,8 @@ func define2() {
         ]
     )
     
-    let sixSocketBestCraftingArmors = Rule(
-        items: [
+    let sixSocketBestCraftingArmors = POERule(
+        when: [
             Sockets.set(.equal(to: 6)),
             BaseType.set(.matches(["Assassin's Garb",
                                    "Glorious Plate",
@@ -81,8 +81,8 @@ func define2() {
 }
 
 func define3() {
-    let sixLinked = Rule(
-        items: .poe(
+    let sixLinked = POERule(
+        when: .poe(
             rarity: .less(than: .unique),
             linkedSockets: .equal(to: 6)
         ),
@@ -95,8 +95,8 @@ func define3() {
         )
     )
     
-    let sixSocketBestCraftingArmors = Rule(
-        items: .poe(
+    let sixSocketBestCraftingArmors = POERule(
+        when: .poe(
             level: .greaterThanOrEqual(to: 84),
             rarity: .lessThanOrEqual(to: .rare),
             baseType: .matches(["Assassin's Garb",

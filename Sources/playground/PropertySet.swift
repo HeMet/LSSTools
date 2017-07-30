@@ -8,7 +8,15 @@
 
 import Foundation
 
-struct PropertySet<Group>: ExpressibleByArrayLiteral {
+protocol PropertySetType {
+    associatedtype _Group
+    
+    static func merge(_ styles: [Self]) -> Self
+}
+
+struct PropertySet<Group>: ExpressibleByArrayLiteral, PropertySetType {
+    typealias _Group = Group
+    
     private var values: [String: Any] = [:]
     private var properties: [String: AnyProperty.Type] = [:]
     
@@ -44,5 +52,14 @@ struct PropertySet<Group>: ExpressibleByArrayLiteral {
     init(arrayLiteral elements: PropertyValuePair...) {
         
     }
+    
+    static func merge(_ styles: [PropertySet<Group>]) -> PropertySet<Group> {
+        fatalError()
+    }
 }
 
+protocol PropertySetConvertible {
+    associatedtype Group
+    
+    func toPropertySet() -> PropertySet<Group>
+}

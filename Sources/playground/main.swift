@@ -17,8 +17,18 @@ extension Sound {
     static let valueDrop = Sound(id: 2, volume: 300)
 }
 
-let sixLinked = Rule(
-    items: [
+let baseStyle: POEStyle = .poe(
+    backgroundColor: Color(r: 75, g: 75, b: 75),
+    borderColor: Color(r: 255, g: 255, b: 0, a: 255),
+    fontSize: 43,
+    dropSound: .valueDrop,
+    visible: true
+)
+
+typealias POERule = Rule<POEItem, POEStyle>
+
+let sixLinked = POERule(
+    when: [
         LinkedSockets.equal(to: 6),
         Rarity.less(than: .unique)
         ],
@@ -31,22 +41,21 @@ let sixLinked = Rule(
     ]
 )
 
-let sixLinked2 = Rule(
-    items: .poe(
-        rarity: .equal(to: .unique),
-        linkedSockets: .equal(to: 6)
-    ),
-    style: .poe(
-        backgroundColor: Color(r: 255, g: 255, b: 255, a: 255),
-        borderColor: .t1Items,
-        fontSize: 45,
-        dropSound: .t1Drop,
-        visible: true
-    )
+let sixLinked2 = POERule(
+    when: [
+        LinkedSockets.equal(to: 6),
+        Rarity.less(than: .unique)
+    ],
+    style: [
+        baseStyle,
+        .poe(
+            visible: false
+        )
+    ]
 )
 
-let sixSocketBestCraftingArmors = Rule(
-    items: .poe(
+let sixSocketBestCraftingArmors = POERule(
+    when: .poe(
         level: .greaterThanOrEqual(to: 84),
         rarity: .lessThanOrEqual(to: .rare),
         baseType: .matches(["Assassin's Garb",
@@ -63,23 +72,4 @@ let sixSocketBestCraftingArmors = Rule(
         Visible.set(true),
         DropSound.set(.valueDrop)
     ]
-)
-
-let sixSocketBestCraftingArmors_: POEItem = .poe(
-    level: .greaterThanOrEqual(to: 84),
-    rarity: .lessThanOrEqual(to: .rare),
-    baseType: .matches(["Assassin's Garb",
-                        "Glorious Plate",
-                        "Astral Plate",
-                        "Vaal Regalia",
-                        "Zodiac Leather"]),
-    sockets: .equal(to: 6)
-)
-
-_ = Rule(
-    items: .poe(
-        width: .equal(to: 2),
-        height: .equal(to: 2)
-    ),
-    style: PropertySet<StyleProperty>()
 )

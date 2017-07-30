@@ -40,6 +40,8 @@ enum DropSound: PropertyType {
 
 enum StyleProperty { }
 
+typealias POEStyle = PropertySet<StyleProperty>
+
 extension PropertySet where Group == StyleProperty {
     static func poe(
         backgroundColor: Color? = nil,
@@ -50,5 +52,16 @@ extension PropertySet where Group == StyleProperty {
         visible: Bool? = nil) -> PropertySet<StyleProperty> {
         
         return PropertySet<StyleProperty>()
+    }
+    
+    func poe(
+        backgroundColor: Color? = nil,
+        textColor: Color? = nil,
+        borderColor: Color? = nil,
+        fontSize: UInt? = nil,
+        dropSound: Sound? = nil,
+        visible: Bool? = nil) -> PropertySet<StyleProperty> {
+        
+        return PropertySet<StyleProperty>.merge([self, .poe(/* input */)])
     }
 }

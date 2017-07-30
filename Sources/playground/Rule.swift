@@ -8,12 +8,36 @@
 
 import Foundation
 
-struct Rule {
-    var items: PropertySet<ItemProperty>
-    var style: PropertySet<StyleProperty>
+protocol RuleType {
+    associatedtype Condition: PropertySetType
+    associatedtype Style: PropertySetType
     
-    init(items: PropertySet<ItemProperty>, style: PropertySet<StyleProperty>) {
-        self.items = items
+    var when: Condition { get set }
+    var style: Style { get set }
+}
+
+struct Rule<Condition, Style>: RuleType
+    where Condition: PropertySetType, Style: PropertySetType {
+    
+    var when: Condition
+    var style: Style
+    
+    init(when: Condition, style: Style) {
+        self.when = when
         self.style = style
+    }
+    
+    // convenience
+    
+    init(when: Condition, style: [Style]) {
+        self.init(when: when, style: .merge(style))
+    }
+    
+    init(when: [Condition], style: Style) {
+        self.init(when: .merge(when), style: style)
+    }
+    
+    init(when: [Condition], style: [Style]) {
+        self.init(when: .merge(when), style: .merge(style))
     }
 }
