@@ -14,18 +14,20 @@ protocol PropertySetType {
     static func merge(_ styles: [Self]) -> Self
 }
 
-struct PropertySet<Group>: ExpressibleByArrayLiteral, PropertySetType {
+final class PropertySet<Group>: ExpressibleByArrayLiteral, PropertySetType {
     typealias _Group = Group
+    
+    // todo: private var inheritedStyles: [PropertySet<Group>] = []
     
     private var values: [String: Any] = [:]
     private var properties: [String: AnyProperty.Type] = [:]
     
-    mutating func insert<P>(_ property: P.Type, value: P.VT) where P: PropertyType, P.Group == Group {
+    func insert<P>(_ property: P.Type, value: P.VT) where P: PropertyType, P.Group == Group {
         values[property.name] = value
         properties[property.name] = property
     }
     
-    mutating func remove<P>(_ property: P.Type) where P: PropertyType, P.Group == Group {
+    func remove<P>(_ property: P.Type) where P: PropertyType, P.Group == Group {
         values[property.name] = nil
         properties[property.name] = nil
     }
@@ -49,7 +51,7 @@ struct PropertySet<Group>: ExpressibleByArrayLiteral, PropertySetType {
         
     }
     
-    init(arrayLiteral elements: PropertyValuePair...) {
+    required init(arrayLiteral elements: PropertyValuePair...) {
         
     }
     
