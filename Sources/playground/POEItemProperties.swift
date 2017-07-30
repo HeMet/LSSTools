@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+ 
 enum ItemWidth: PropertyType {
     typealias VT = Comparison<WidthValue>
     typealias Group = ItemProperty
@@ -55,8 +55,25 @@ enum Quality: PropertyType {
 
 enum ItemProperty { }
 
+typealias POEItem = PropertySet<ItemProperty>
+
 extension PropertySet where Group == ItemProperty {
-    static func poe(width: Comparison<WidthValue>? = nil, height: Comparison<HeightValue>? = nil) -> PropertySet<ItemProperty> {
+    static func poe(
+        level: Comparison<LevelValue>? = nil,
+        dropLevel: Comparison<LevelValue>? = nil,
+        quality: Comparison<QualityValue>? = nil,
+        rarity: Comparison<ItemRarity>? = nil,
+        // class
+        baseType: Equality<StringList>? = nil,
+        sockets: Comparison<NumberOfSockets>? = nil,
+        linkedSockets: Comparison<NumberOfLinkedSockets>? = nil,
+        // socket group
+        width: Comparison<WidthValue>? = nil,
+        height: Comparison<HeightValue>? = nil,
+        identified: Equality<Bool>? = nil,
+        corrupted: Equality<Bool>? = nil
+        ) -> PropertySet<ItemProperty> {
+        // TODO:
         var result = PropertySet<ItemProperty>()
         if let value = width {
             result.insert(ItemWidth.self, value: value)
