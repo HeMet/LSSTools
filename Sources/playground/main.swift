@@ -19,29 +19,43 @@ extension Sound {
 
 let sixLinked = Rule(
     items: [
-        LinkedSockets.set(.equal(to: 6)),
-        Rarity.set(.less(than: .unique))
+        LinkedSockets.equal(to: 6),
+        Rarity.less(than: .unique)
         ],
     style: [
-        BackgroundColor.set(Color(r: 255, g: 255, b: 255, a: 255)),
-        BorderColor.set(.t1Items),
-        FontSize.set(45),
-        Visible.set(true),
-        DropSound.set(.t1Drop)
+        BackgroundColor.self == Color(r: 255, g: 255, b: 255, a: 255),
+        BorderColor.self == .t1Items,
+        FontSize.self == 45,
+        Visible.self == true,
+        DropSound.self == .t1Drop
     ]
 )
 
+let sixLinked2 = Rule(
+    items: .poe(
+        rarity: .equal(to: .unique),
+        linkedSockets: .equal(to: 6)
+    ),
+    style: .poe(
+        backgroundColor: Color(r: 255, g: 255, b: 255, a: 255),
+        borderColor: .t1Items,
+        fontSize: 45,
+        dropSound: .t1Drop,
+        visible: true
+    )
+)
+
 let sixSocketBestCraftingArmors = Rule(
-    items: [
-        Sockets.set(.equal(to: 6)),
-        BaseType.set(.matches(["Assassin's Garb",
-                          "Glorious Plate",
-                          "Astral Plate",
-                          "Vaal Regalia",
-                          "Zodiac Leather"])),
-        Rarity.set(.lessThanOrEqual(to: .rare)),
-        ItemLevel.set(.greaterThanOrEqual(to: 84))
-        ],
+    items: .poe(
+        level: .greaterThanOrEqual(to: 84),
+        rarity: .lessThanOrEqual(to: .rare),
+        baseType: .matches(["Assassin's Garb",
+                            "Glorious Plate",
+                            "Astral Plate",
+                            "Vaal Regalia",
+                            "Zodiac Leather"]),
+        sockets: .equal(to: 6)
+        ),
     style: [
         BackgroundColor.set(Color(r: 75, g: 75, b: 75)),
         BorderColor.set(Color(r: 255, g: 255, b: 0, a: 255)),
@@ -51,16 +65,16 @@ let sixSocketBestCraftingArmors = Rule(
     ]
 )
 
-let sixSocketBestCraftingArmors_: PropertySet<ItemProperty> = [
-    Sockets.set(.equal(to: 6)),
-    BaseType.set(.matches(["Assassin's Garb",
-                      "Glorious Plate",
-                      "Astral Plate",
-                      "Vaal Regalia",
-                      "Zodiac Leather"])),
-    Rarity.set(.lessThanOrEqual(to: .rare)),
-    ItemLevel.set(.greaterThanOrEqual(to: 84))
-]
+let sixSocketBestCraftingArmors_: POEItem = .poe(
+    level: .greaterThanOrEqual(to: 84),
+    rarity: .lessThanOrEqual(to: .rare),
+    baseType: .matches(["Assassin's Garb",
+                        "Glorious Plate",
+                        "Astral Plate",
+                        "Vaal Regalia",
+                        "Zodiac Leather"]),
+    sockets: .equal(to: 6)
+)
 
 _ = Rule(
     items: .poe(
@@ -69,17 +83,3 @@ _ = Rule(
     ),
     style: PropertySet<StyleProperty>()
 )
-
-var itemSet = PropertySet<ItemProperty>()
-itemSet.insert(ItemWidth.self, value: .equal(to:3))
-itemSet.insert(ItemHeight.self, value: .equal(to:2))
-
-var itemSet2 = PropertySet<ItemProperty>(
-    .bind(ItemWidth.self, .equal(to: 3)),
-    .bind(ItemHeight.self, .equal(to: 2))
-)
-
-var itemSet3: PropertySet<ItemProperty> = [
-    .bind(ItemWidth.self, .equal(to: 3)),
-    .bind(ItemHeight.self, .equal(to: 2))
-]

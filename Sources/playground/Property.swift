@@ -35,3 +35,68 @@ extension PropertyType {
         return PropertySet<Group>.PropertyValuePair(name: name, property: self, value: value)
     }
 }
+
+extension PropertyType where VT: ComparisonMatcher {
+    static func equal(to: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Comparison<VT.VT>.equal(to: to))
+    }
+    
+    static func less(than: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Comparison<VT.VT>.less(than: than))
+    }
+    
+    static func greater(than: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Comparison<VT.VT>.greater(than: than))
+        
+    }
+    
+    static func lessThanOrEqual(to: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Comparison<VT.VT>.lessThanOrEqual(to: to))
+    }
+    
+    static func greaterThanOrEqual(to: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Comparison<VT.VT>.greaterThanOrEqual(to: to))
+    }
+}
+
+extension PropertyType where VT: Matcher {
+    static func matches(_ value: VT.VT.Value) -> PropertySet<Group>.PropertyValuePair {
+        return PropertySet<Group>.PropertyValuePair(
+            name: name,
+            property: self,
+            value: Equality<VT.VT>.matches(value))
+    }
+}
+
+//extension PropertyType where VT == Comparison<NumberOfLinkedSockets> {
+//    static func equal(to: UInt) -> PropertySet<Group>.PropertyValuePair {
+//        return PropertySet<Group>.PropertyValuePair(
+//            name: name,
+//            property: self,
+//            value: Comparison<NumberOfLinkedSockets>.equal(to: to))
+//    }
+//}
+//
+//extension PropertyType where VT == Comparison<NumberOfSockets> {
+//    static func equal(to: UInt) -> PropertySet<Group>.PropertyValuePair {
+//        return PropertySet<Group>.PropertyValuePair(
+//            name: name,
+//            property: self,
+//            value: Comparison<NumberOfSockets>.equal(to: to))
+//    }
+//}
